@@ -1,0 +1,344 @@
+[gd_scene load_steps=15 format=3 uid="uid://cnf2it62k6wcy"]
+
+[ext_resource type="Script" uid="uid://bwf28vfi255u0" path="res://addons/mobile_debugger/Debugger.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toggle"]
+bg_color = Color(0.15, 0.35, 0.65, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.75, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_window"]
+bg_color = Color(0.08, 0.08, 0.1, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.6, 1, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_titlebar"]
+bg_color = Color(0.15, 0.25, 0.45, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close"]
+bg_color = Color(0.65, 0.15, 0.15, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_oli2n"]
+font_size = 30
+font_color = Color(0.99999994, 1.0000001, 1.0000001, 0.767184)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_watch"]
+bg_color = Color(0.05, 0.12, 0.05, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.6, 0.2, 0.5)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_stats"]
+bg_color = Color(0.1, 0.1, 0.15, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_log"]
+bg_color = Color(0.04999993, 0.050000004, 0.07, 0.50554323)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.2, 0.3, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input"]
+bg_color = Color(0.12, 0.12, 0.18, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.5, 0.8, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_send"]
+bg_color = Color(0.15, 0.55, 0.25, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+bg_color = Color(0.18, 0.35, 0.6, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.6, 1, 0.8)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+bg_color = Color(0.1, 0.22, 0.45, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+bg_color = Color(0.25, 0.45, 0.75, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MobileDebugger" type="CanvasLayer"]
+process_mode = 3
+layer = 128
+script = ExtResource("1_script")
+
+[node name="ToggleButton" type="Button" parent="."]
+z_index = 10
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 130.0
+offset_bottom = 70.0
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_toggle")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_toggle")
+theme_override_styles/hover = SubResource("StyleBoxFlat_toggle")
+text = "DEBUG"
+
+[node name="DebugWindow" type="Panel" parent="."]
+offset_left = 157.0
+offset_top = 22.0
+offset_right = 1057.0
+offset_bottom = 622.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_window")
+
+[node name="VBox" type="VBoxContainer" parent="DebugWindow"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+theme_override_constants/separation = 6
+
+[node name="TitleBar" type="Panel" parent="DebugWindow/VBox"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_titlebar")
+
+[node name="HBox" type="HBoxContainer" parent="DebugWindow/VBox/TitleBar"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = -8.0
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="DebugWindow/VBox/TitleBar/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "MOBILE DEBUGGER "
+vertical_alignment = 1
+
+[node name="CloseBtn" type="Button" parent="DebugWindow/VBox/TitleBar/HBox"]
+custom_minimum_size = Vector2(56, 40)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_close")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_close")
+theme_override_styles/hover = SubResource("StyleBoxFlat_close")
+text = "✕"
+
+[node name="ResizeBtn" type="Control" parent="DebugWindow/VBox/TitleBar/HBox"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="ResizeBtn" type="Label" parent="DebugWindow/VBox/TitleBar/HBox/ResizeBtn"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = -2.0
+offset_right = 37.0
+offset_bottom = 50.0
+text = "<"
+label_settings = SubResource("LabelSettings_oli2n")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="WatchPanel" type="PanelContainer" parent="DebugWindow/VBox"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_watch")
+
+[node name="WatchLabel" type="RichTextLabel" parent="DebugWindow/VBox/WatchPanel"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[color=#888888]No variables watched.[/color]"
+scroll_active = false
+
+[node name="StatsBar" type="PanelContainer" parent="DebugWindow/VBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_stats")
+
+[node name="StatsLabel" type="Label" parent="DebugWindow/VBox/StatsBar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 17
+text = "FPS: -- | RAM: -- MB | Objects: --"
+vertical_alignment = 1
+
+[node name="LogScroll" type="ScrollContainer" parent="DebugWindow/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_log")
+
+[node name="VScrollBar" type="VScrollBar" parent="DebugWindow/VBox/LogScroll"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="LogLabel" type="RichTextLabel" parent="DebugWindow/VBox/LogScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.88, 0.88, 0.88, 1)
+theme_override_font_sizes/normal_font_size = 17
+bbcode_enabled = true
+
+[node name="InputRow" type="HBoxContainer" parent="DebugWindow/VBox"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="CmdInput" type="LineEdit" parent="DebugWindow/VBox/InputRow"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_input")
+placeholder_text = "Enter command..."
+clear_button_enabled = true
+
+[node name="SendBtn" type="Button" parent="DebugWindow/VBox/InputRow"]
+custom_minimum_size = Vector2(100, 52)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_send")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_send")
+theme_override_styles/hover = SubResource("StyleBoxFlat_send")
+text = "SEND"
+
+[node name="ToolsRow1" type="HBoxContainer" parent="DebugWindow/VBox"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="PauseBtn" type="Button" parent="DebugWindow/VBox/ToolsRow1"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "Pause"
+
+[node name="RestartBtn" type="Button" parent="DebugWindow/VBox/ToolsRow1"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "Restart"
+
+[node name="HitboxBtn" type="Button" parent="DebugWindow/VBox/ToolsRow1"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "Show Hitboxes"
+
+[node name="ClearBtn" type="Button" parent="DebugWindow/VBox/ToolsRow1"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "Clear"
+
+[node name="CopyBtn" type="Button" parent="DebugWindow/VBox/ToolsRow1"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "Copy"
+
+[node name="ToolsRow2" type="HBoxContainer" parent="DebugWindow/VBox"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="SpeedLabel" type="Label" parent="DebugWindow/VBox/ToolsRow2"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 19
+text = "Speed: 1.00x"
+vertical_alignment = 1
+
+[node name="SpeedSlider" type="HSlider" parent="DebugWindow/VBox/ToolsRow2"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 2.0
+step = 0.05
+value = 1.0
